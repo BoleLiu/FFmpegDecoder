@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.xiaobole.ffmpegdecoder"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -14,6 +14,13 @@ android {
                 cppFlags ""
             }
         }
+        ndk {
+            abiFilters("armeabi-v7a", "armeabi")
+        }
+    }
+    packagingOptions {
+        pickFirst 'lib/armeabi-v7a/libffmpeg-decode.so'
+        pickFirst 'lib/armeabi/libffmpeg-decode.so'
     }
     buildTypes {
         release {
@@ -24,7 +31,7 @@ android {
     externalNativeBuild {
         cmake {
             path "src/main/cpp/CMakeLists.txt"
-            version "3.10.2"
+            version "3.6.0"
         }
     }
 }
